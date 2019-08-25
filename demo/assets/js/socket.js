@@ -22,6 +22,7 @@ let messagesContainer = document.querySelector("#messages")
 
 
 // メッセージの枠でEnterを押すとメッセージが送信される
+
 // メッセージは空にする(ユーザー名はそのまま)
 chatInput.addEventListener("keypress", event => {
   if(event.keyCode === 13){

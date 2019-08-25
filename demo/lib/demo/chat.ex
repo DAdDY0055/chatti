@@ -17,7 +17,11 @@ defmodule Demo.Chat do
     |> validate_required([:user, :chat])
   end
 
-  def insert(changeset) do
+  def all, do: Repo.all(__struct__)
+
+  def save(payload) do
+    changeset = changeset(__struct__, payload)
+
     Repo.insert(changeset)
   end
 end

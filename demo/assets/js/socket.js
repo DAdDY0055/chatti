@@ -25,14 +25,14 @@ let messagesContainer = document.querySelector("#messages")
 // メッセージは空にする(ユーザー名はそのまま)
 chatInput.addEventListener("keypress", event => {
   if(event.keyCode === 13){
-    channel.push("new_msg", {user: userInput.value, body: chatInput.value})
+    channel.push("new_msg", {user: userInput.value, chat: chatInput.value})
     chatInput.value = ""
   }
 })
 
 channel.on("new_msg", payload => {
   let messageItem = document.createElement("li")
-  messageItem.innerText = `[${payload.user}] ${payload.body}`
+  messageItem.innerText = `[${payload.user}] ${payload.chat}`
   messagesContainer.appendChild(messageItem)
 })
 

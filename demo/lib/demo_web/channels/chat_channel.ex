@@ -1,5 +1,6 @@
 defmodule DemoWeb.ChatChannel do
   use DemoWeb, :channel
+  alias Demo.Chat
 
   def join("chat:lobby", payload, socket) do
     Process.flag(:trap_exit, true) # 異常時にプロセスが死なない為の設定
@@ -7,6 +8,19 @@ defmodule DemoWeb.ChatChannel do
   end
 
   def handle_in("new_msg", payload, socket) do
+    IO.inspect(%Chat{})
+    IO.inspect(payload)
+
+    # IO.inspect(%{:chat => "chat", :user => "user"} = payload)
+
+    changeset = Chat.changeset(%Chat{}, payload)
+    case Chat.insert(changeset) do
+      {:ok, _} ->
+        IO.inspect("ok")
+      {:error, changeset} ->
+        IO.inspect("error")
+    end
+
     broadcast! socket, "new_msg", payload
     {:reply, {:ok, payload}, socket}
   end

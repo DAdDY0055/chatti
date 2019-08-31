@@ -38,7 +38,18 @@ channel.on("new_msg", payload => {
 })
 
 channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+  .receive("ok", resp => {
+    console.log("Joined successfully", resp)
+  }
+
+  // , all => {
+  //   console.log(all)
+
+    // let messageItem = document.createElement("li")
+    // messageItem.innerText = `[${all.user}] ${all.chat}`
+    // messagesContainer.appendChild(messageItem)
+  // }
+  )
+  .receive("error", resp => console.log("Unable to join", resp))
 
 export default socket

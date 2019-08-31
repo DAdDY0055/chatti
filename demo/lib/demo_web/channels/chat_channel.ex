@@ -4,7 +4,10 @@ defmodule DemoWeb.ChatChannel do
 
   def join("chat:lobby", payload, socket) do
     Process.flag(:trap_exit, true) # 異常時にプロセスが死なない為の設定
-    # all = Chat.all
+
+    load_messages()
+    |> IO.inspect()
+
    {:ok, socket}
   end
 
@@ -37,11 +40,8 @@ defmodule DemoWeb.ChatChannel do
   end
 
   defp load_messages() do
-    Agent.get(Demo.History, fn messages -> Enum.reverse(messages) end)
-  end
-
-  defp save_message(message) do
-    Agent.update(Demo.History, fn messages -> [message | messages] end)
+    Chat.all()
+    |> Enum.map(fn messages ->  messages end)
   end
 
 end

@@ -1,7 +1,8 @@
 defmodule DemoWeb.PageController do
   use DemoWeb, :controller
+  alias Demo.Chat
 
   def index(conn, _params) do
-    render(conn, "index.html")
-  end
+    chats = Chat.all
+    render(conn, "index.html", chats: chats)  end
 end

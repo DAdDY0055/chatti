@@ -1,6 +1,8 @@
 defmodule Demo.Chat do
   use Ecto.Schema
   import Ecto.Changeset
+  import Ecto.Query
+
   alias Demo.Repo
 
   schema "chats" do
@@ -17,7 +19,10 @@ defmodule Demo.Chat do
     |> validate_required([:user, :chat])
   end
 
-  def all, do: Repo.all(__struct__)
+  def all do
+    query = select(__MODULE__, [c], c)
+    Repo.all(query)
+  end
 
   def save(payload) do
     changeset = changeset(__struct__, payload)

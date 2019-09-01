@@ -18,9 +18,6 @@ let userInput         = document.querySelector("#user-input")
 let chatInput         = document.querySelector("#chat-input")
 let messagesContainer = document.querySelector("#messages")
 
-// join時に過去のMSGを取得して、要素に追加する
-
-
 // メッセージの枠でEnterを押すとメッセージが送信される
 
 // メッセージは空にする(ユーザー名はそのまま)
@@ -31,6 +28,9 @@ chatInput.addEventListener("keypress", event => {
   }
 })
 
+// TODO: 送信ボタンでも送信できるように
+
+// TODO: 空文字だと送信できないようにする
 channel.on("new_msg", payload => {
   let messageItem = document.createElement("li")
   messageItem.innerText = `[${payload.user}] ${payload.chat}`
@@ -38,18 +38,7 @@ channel.on("new_msg", payload => {
 })
 
 channel.join()
-  .receive("ok", resp => {
-    console.log("Joined successfully", resp)
-  }
-
-  // , all => {
-  //   console.log(all)
-
-    // let messageItem = document.createElement("li")
-    // messageItem.innerText = `[${all.user}] ${all.chat}`
-    // messagesContainer.appendChild(messageItem)
-  // }
-  )
+  .receive("ok", resp => console.log("Joined successfully", resp))
   .receive("error", resp => console.log("Unable to join", resp))
 
 export default socket

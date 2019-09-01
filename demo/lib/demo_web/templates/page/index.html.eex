@@ -1,4 +1,5 @@
 <%# TODO: CSSでフォント修正 %>
+<%# TODO: 表示メッセージはスクロールで全部表示しないようにしたい %>
 <div id="footer">
   <div class="container">
     <div class="row">

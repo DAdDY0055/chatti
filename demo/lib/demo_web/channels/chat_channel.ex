@@ -6,15 +6,15 @@ defmodule DemoWeb.ChatChannel do
   def join("chat:lobby", payload, socket) do
     Process.flag(:trap_exit, true) # 異常時にプロセスが死なない為の設定
 
-    {:ok, token_with_default_claims} = Token.generate_and_sign()
+    # {:ok, token_with_default_claims} = Token.generate_and_sign()
 
-    extra_claims = %{"user_id" => "some_id"}
-    token_with_default_plus_custom_claims = Token.generate_and_sign!(extra_claims)
+    # extra_claims = %{"user_id" => "some_id"}
+    # token_with_default_plus_custom_claims = Token.generate_and_sign!(extra_claims)
 
-    {:ok, claims} = Token.verify_and_validate(token)
+    # {:ok, claims} = Token.verify_and_validate(token)
 
-    # Example with a different key than the default
-    claims = Token.verify_and_validate!(token, another_key)
+    # # Example with a different key than the default
+    # claims = Token.verify_and_validate!(token, another_key)
 
    {:ok, socket}
   end

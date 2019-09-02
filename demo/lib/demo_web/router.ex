@@ -20,7 +20,10 @@ defmodule DemoWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", DemoWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", DemoWeb do
+    pipe_through :api
+
+    # resources "/", AuthController
+    resources "/auth", UserController
+  end
 end

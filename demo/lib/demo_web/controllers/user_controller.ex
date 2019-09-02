@@ -3,6 +3,7 @@ defmodule DemoWeb.UserController do
 
   alias Demo.Auth
   alias Demo.Auth.User
+  alias Demo.Token
 
   action_fallback DemoWeb.FallbackController
 
@@ -12,14 +13,12 @@ defmodule DemoWeb.UserController do
   # end
 
   def create(conn, user_params) do
-    # def create(conn, %{"gid" => "gid", "group_name" => "group_name", "uid" => "uid", "user_name" =>"user_name"}) do
-    # token = generate_and_sign
-    IO.inspect(user_params)
     with {:ok, %User{} = user} <- Auth.create_user(user_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      token = Demo.Token.generate_and_sign!(user_params)
+
+      # {:ok, claims} = Demo.Token.verify_and_validate(token)
+
+      render(conn, "token.json", token: token)
     end
   end
 

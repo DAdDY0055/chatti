@@ -17,4 +17,8 @@ defmodule DemoWeb.UserView do
       gid: user.gid,
       group_name: user.group_name}
   end
+
+  def render("token.json", %{token: token}) do
+    %{token: token}
+  end
 end

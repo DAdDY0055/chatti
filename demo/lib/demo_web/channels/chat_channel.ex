@@ -3,7 +3,7 @@ defmodule DemoWeb.ChatChannel do
   alias Demo.Chat
   alias Demo.Tolen
 
-  def join("chat:lobby", payload, socket) do
+  def join("chat:" <> gid, payload, socket) do
     Process.flag(:trap_exit, true) # 異常時にプロセスが死なない為の設定
 
     # {:ok, token_with_default_claims} = Token.generate_and_sign()

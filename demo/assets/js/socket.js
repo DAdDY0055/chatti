@@ -8,12 +8,14 @@
 // from the params if you are not using authentication.
 import {Socket} from "phoenix"
 
-let socket = new Socket("/socket", {params: {token: window.userToken}})
+let socket = new Socket("/socket", { params: { token: window.userToken } })
 
 socket.connect()
 
+let LoginRoom = `chat:${window.userToken}`
+
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("chat:lobby", {})
+let channel = socket.channel(LoginRoom, {})
 let userInput         = document.querySelector("#user-input")
 let chatInput         = document.querySelector("#chat-input")
 let messagesContainer = document.querySelector("#messages")

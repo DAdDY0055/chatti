@@ -18,7 +18,7 @@ class Demo {
     // --- JOIN ---
 
     // chat:lobbyというトピックのチャネル
-    var chan = socket.channel("chat:lobby", {})
+    var chan = socket.channel("chat:hoge", {})
 
     // チャネルに接続(join)
     chan.join()
